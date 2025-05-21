@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolinha do BOB | Edição Real</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Nova Paleta de Cores */
+        :root {
+            --royal-blue: #0026A4;
+            --white: #FFFFFF;
+            --yellow: #F4B400;
+            --red: #E84545;
+            --purple: #6A0DAD;
+            --light-blue: #3498DB;
+            --dark-blue: #001A6E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background: var(--royal-blue);
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Efeito de ondas no fundo */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 38, 164, 0.8), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(244, 180, 0, 0.1), transparent 70%);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--dark-blue);
+            border-bottom: 2px solid var(--yellow);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--yellow), var(--white));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(244, 180, 0, 0.3);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--yellow);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 101;
+            transition: all 0.3s;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: var(--yellow);
+            text-shadow: 0 0 10px rgba(244, 180, 0, 0.5);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--yellow);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section - Efeito de Skateboard */
+        .hero {
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 20px;
+            background: linear-gradient(to bottom, var(--royal-blue), var(--dark-blue));
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--yellow), var(--white));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(244, 180, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-btn {
+            padding: 12px 30px;
+            background: var(--yellow);
+            border: none;
+            border-radius: 30px;
+            color: var(--dark-blue);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(244, 180, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-size: 1.1rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(244, 180, 0, 0.7);
+            color: var(--royal-blue);
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        .cta-btn:hover::before {
+            left: 0;
+        }
+
+        /* Skateboard Animation */
+        .skateboard {
+            position: absolute;
+            width: 150px;
+            height: 40px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30"><rect x="5" y="10" width="90" height="10" rx="5" fill="%23F4B400"/><circle cx="20" cy="25" r="5" fill="%230026A4" stroke="%23E84545" stroke-width="2"/><circle cx="80" cy="25" r="5" fill="%230026A4" stroke="%23E84545" stroke-width="2"/></svg>') no-repeat;
+            bottom: 10%;
+            left: -150px;
+            animation: skate 15s linear infinite;
+        }
+
+        @keyframes skate {
+            0% { left: -150px; transform: rotate(0deg); }
+            10% { bottom: 10%; }
+            20% { bottom: 30%; transform: rotate(-10deg); }
+            30% { bottom: 10%; transform: rotate(0deg); }
+            40% { bottom: 25%; transform: rotate(5deg); }
+            50% { bottom: 10%; transform: rotate(0deg); }
+            100% { left: 100%; }
+        }
+
+        /* Seção de Vídeos */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 50px;
+            background: var(--dark-blue);
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(244, 180, 0, 0.2);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(244, 180, 0, 0.2);
+            border-color: var(--yellow);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, var(--red), var(--purple));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .video-thumbnail::after {
+            content: '▶';
+            position: absolute;
+            color: white;
+            font-size: 3rem;
+            opacity: 0.8;
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-info h3 {
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+
+        .video-info p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Formulário com Efeito de "Halfpipe" */
+        .halfpipe-form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid var(--yellow);
+            position: relative;
+            overflow: hidden;
+            background: var(--dark-blue);
+        }
+
+        .halfpipe-form::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(244, 180, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--yellow);
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--light-blue);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--yellow);
+            box-shadow: 0 0 10px var(--yellow);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--red);
+            border: none;
+            border-radius: 5px;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(232, 69, 69, 0.5);
+            background: #d43f3f;
+        }
+
+        /* Footer com Efeito de LED */
+        footer {
+            padding: 30px;
+            text-align: center;
+            background: var(--dark-blue);
+            border-top: 2px solid var(--yellow);
+            position: relative;
+        }
+
+        .led-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                var(--yellow), 
+                var(--red), 
+                var(--purple), 
+                var(--light-blue));
+            animation: ledAnimation 5s linear infinite;
+            background-size: 500% 100%;
+        }
+
+        @keyframes ledAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(244, 180, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            color: var(--yellow);
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            background: var(--yellow);
+            transform: translateY(-5px) rotate(10deg);
+            color: var(--dark-blue);
+            box-shadow: 0 0 15px rgba(244, 180, 0, 0.5);
+        }
+
+        /* Responsividade Aprimorada */
+        /* Dispositivos muito pequenos (Android pequenos) */
+        @media (max-width: 360px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .video-grid {
+                padding: 20px 10px;
+                grid-template-columns: 1fr;
+            }
+            
+            .halfpipe-form {
+                margin: 30px 15px;
+                padding: 20px;
+            }
+        }
+
+        /* Telefones (Android, iPhone) */
+        @media (max-width: 480px) {
+            .menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--dark-blue);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: all 0.5s;
+                z-index: 100;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                height: 80vh;
+                min-height: 400px;
+            }
+        }
+
+        /* Tablets pequenos (retrato) */
+        @media (min-width: 481px) and (max-width: 767px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .halfpipe-form {
+                margin: 40px 20px;
+            }
+        }
+
+        /* Tablets grandes (paisagem) e pequenos laptops */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Laptops e desktops pequenos */
+        @media (min-width: 1025px) and (max-width: 1280px) {
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+        }
+
+        /* Dispositivos com telas muito grandes */
+        @media (min-width: 1281px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+                max-width: 700px;
+            }
+        }
+
+        /* Ajustes para orientação paisagem em dispositivos móveis */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                height: auto;
+                padding: 50px 20px;
+                min-height: auto;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+            
+            .hero p {
+                margin-bottom: 20px;
+                font-size: 1rem;
+            }
+            
+            .skateboard {
+                display: none;
+            }
+        }
+
+        /* Ajustes para iPad Pro */
+        @media only screen 
+          and (min-width: 1024px) 
+          and (max-height: 1366px) 
+          and (orientation: portrait) 
+          and (-webkit-min-device-pixel-ratio: 1.5) {
+            .hero {
+                height: 60vh;
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header com Menu Real -->
+    <header>
+        <div class="logo">Escolinha de Skate do BOB</div>
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <nav>
+            <ul id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#videos">Manobras</a></li>
+                <li><a href="#form">Matrícula</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section com Skateboard Animado -->
+    <section class="hero" id="home">
+        <div class="skateboard"></div>
+        <h1>DOMINE O CONCRETO</h1>
+        <p>Na Escolinha do BOB, transformamos ruas em pistas e desafios em conquistas. Venha fazer parte da nova geração do skate brasileiro!</p>
+        <button class="cta-btn" id="ctaBtn">INSCREVA-SE AGORA</button>
+    </section>
+
+    <!-- Grade de Vídeos de Manobras -->
+    <section class="video-grid" id="videos">
+        <div class="video-card">
+            <div class="video-thumbnail"></div>
+            <div class="video-info">
+                <h3>Ollie Perfeito</h3>
+                <p>A base para todas as manobras. Domine o salto com o BOB.</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <div class="video-thumbnail"></div>
+            <div class="video-info">
+                <h3>Kickflip Radical</h3>
+                <p>Do básico ao avançado em 8 semanas de treino.</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <div class="video-thumbnail"></div>
+            <div class="video-info">
+                <h3>Grinds em Corrimões</h3>
+                <p>Técnicas para deslizar como um pro.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário em Formato de Halfpipe -->
+    <section id="form">
+        <form class="halfpipe-form">
+            <h2 style="text-align: center; color: var(--yellow); margin-bottom: 30px;">FAÇA PARTE DO TIME BOB</h2>
+            <div class="form-group">
+                <label for="name">NOME COMPLETO</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-MAIL</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="level">NÍVEL DE SKATE</label>
+                <select id="level" required>
+                    <option value="">Selecione</option>
+                    <option value="beginner">Iniciante - Aprendendo o básico</option>
+                    <option value="intermediate">Intermediário - Já faço algumas manobras</option>
+                    <option value="advanced">Avançado - Quero competir</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">POR QUE QUER SKATAR COM O BOB?</label>
+                <textarea id="message" rows="4"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">ENVIAR INSCRIÇÃO</button>
+        </form>
+    </section>
+
+    <!-- Footer com Efeito de LED -->
+    <footer id="contact">
+        <div class="led-strip"></div>
+        <h3 style="color: var(--yellow); margin-bottom: 20px;">ACOMPANHE O BOB</h3>
+        <div class="social-links">
+            <a href="#" class="social-icon">📸</a>
+            <a href="#" class="social-icon">🎥</a>
+            <a href="#" class="social-icon">📱</a>
+            <a href="#" class="social-icon">🛹</a>
+        </div>
+        <p>Rua do Skate, 123 - Halfpipe City</p>
+        <p>contato@bobskate.com | (11) 98765-4321</p>
+        <p style="margin-top: 20px; color: var(--light-blue);">© 2023 Escolinha do BOB - Todos os direitos radicais reservados</p>
+    </footer>
+
+    <script>
+        // JS - Interações Criativas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu Mobile
+            const menuBtn = document.getElementById('menuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            menuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                menuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Fechar menu ao clicar em um link
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        menuBtn.textContent = '☰';
+                    }
+                });
+            });
+
+            // Efeito de Digitação no Hero
+            const heroTitle = document.querySelector('.hero h1');
+            const originalText = heroTitle.textContent;
+            heroTitle.textContent = '';
+            
+            let i = 0;
+            const typingEffect = setInterval(() => {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingEffect);
+                }
+            }, 100);
+
+            // Efeito de Parallax no Skateboard
+            window.addEventListener('scroll', function() {
+                const skateboard = document.querySelector('.skateboard');
+                if (skateboard) {
+                    const scrollValue = window.scrollY;
+                    skateboard.style.animationDuration = `${15 - scrollValue * 0.01}s`;
+                }
+            });
+
+            // Formulário Interativo
+            const form = document.querySelector('.halfpipe-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Efeito de confirmação
+                    form.innerHTML = `
+                        <div style="text-align: center; padding: 40px 0;">
+                            <h2 style="color: var(--yellow); margin-bottom: 20px;">INSCRIÇÃO ENVIADA!</h2>
+                            <p style="margin-bottom: 20px;">O BOB vai entrar em contato em 24h com os detalhes.</p>
+                            <div style="font-size: 3rem;">🤙</div>
+                        </div>
+                    `;
+                    
+                    // Efeito de fogos de artifício
+                    const colors = ['var(--yellow)', 'var(--red)', 'var(--light-blue)', 'var(--purple)'];
+                    for (let i = 0; i < 50; i++) {
+                        setTimeout(() => {
+                            const firework = document.createElement('div');
+                            firework.style.position = 'absolute';
+                            firework.style.width = '5px';
+                            firework.style.height = '5px';
+                            firework.style.borderRadius = '50%';
+                            firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                            firework.style.left = `${Math.random() * 100}%`;
+                            firework.style.top = `${Math.random() * 100}%`;
+                            firework.style.boxShadow = `0 0 10px 2px ${colors[Math.floor(Math.random() * colors.length)]}`;
+                            firework.style.animation = `fadeOut 1s forwards`;
+                            form.appendChild(firework);
+                            
+                            setTimeout(() => {
+                                firework.remove();
+                            }, 1000);
+                        }, i * 50);
+                    }
+                });
+            }
+
+            // Adicionando estilos dinâmicos para os fogos
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeOut {
+                    to { transform: translateY(-100px) scale(2); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Suavizar rolagem para links âncora
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
